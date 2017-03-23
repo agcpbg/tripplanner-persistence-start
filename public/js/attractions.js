@@ -32,7 +32,7 @@ var attractionsModule = (function () {
     getHotel: function(hotels) {
       enhanced.hotels = hotels;
     },
-    
+
     sendHotels: function() {
       // console.log("enhanced.hotels: ", enhanced.hotels)
       return enhanced.hotels;

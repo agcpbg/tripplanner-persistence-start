@@ -38,6 +38,7 @@ var options = function(){
     var $select = $(this).siblings('select');
     var type = $select.data('type'); // from HTML data-type attribute
     var id = $select.find(':selected').val();
+    if(type === 'hotel') { addHotel(id); }
     // get associated attraction and add it to the current day in the trip
     var attraction = attractionsModule.getByTypeAndId(type, id);
     tripModule.addToCurrent(attraction);

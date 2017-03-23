@@ -49,10 +49,20 @@ router.delete('/api/days/:dayNum/hotel', function(req, res, next) {
 
 //create new day?
 router.post('/api/days', function(req, res, next) {
+    console.log("req body:", req.body);
     Day.create(req.body)
     .then(function(newDay) {
-        res.send(newDay)
+        console.log('new day: ', newDay);
+        res.json(newDay);
     })
 })
+
+router.put('/api/days/:dayNum/hotel', function(req, res, next) {
+    Day.update({ hotelId: req.body.id },
+        {where: {id: sendCurrentDay()} })
+    .then(function(day) {
+        res.json(day);
+    });
+});
 
 module.exports = router;
