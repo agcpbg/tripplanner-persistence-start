@@ -1,9 +1,28 @@
+  function getAllDay() {
+    return $.get('/api/days')
+  }
+
+  function getOneDay(dayNum) {
+    return $.get('/api/days/${dayNum}')
+  }
+
+  //for deleting one specific day
+  // $.delete('/api/days')
+  //   .then(function(day) {
+
+  //   })
+
+  //for creating one specific day]
+  function createDay(dayInfo) {
+    console.log("dayInfo: ", dayInfo)
+    return $.post('/api/days', dayInfo)
+  } 
+    
 $(document).ready(function() {
-
-
-
-  $.get('/api/hotels')
+  var gettingHotels = $.get('/api/hotels')
   .then(function (hotels) {
+    var hotelsArr = hotels.map(attractionModule.create)
+    attractionsModule.getHotel(hotelsArr)
     var $hotelsChoices = $('#hotel-choices');
     hotels.forEach(function(hotel){
       var $hotelOption = $('<option></option>').text(hotel.name);
@@ -12,8 +31,10 @@ $(document).ready(function() {
   })
   .catch( console.error.bind(console) );
 
-  $.get('/api/restaurants')
+  var gettingRestaurants = $.get('/api/restaurants')
     .then(function (restaurants) {
+      var restaurantsArr = restaurants.map(attractionModule.create)
+      attractionsModule.getRestaurant(restaurantsArr)
       var $restaurantsChoices = $('#restaurant-choices');
       restaurants.forEach(function(restaurant){
         var $restaurantOption = $('<option></option>').text(restaurant.name);
@@ -22,8 +43,10 @@ $(document).ready(function() {
     })
     .catch( console.error.bind(console) );
 
-  $.get('/api/activities')
+  var gettingActivities = $.get('/api/activities')
   .then(function (activities) {
+    var activitiesArr = activities.map(attractionModule.create)
+    attractionsModule.getActivity(activitiesArr)
     var $activitiesChoices = $('#activity-choices');
     activities.forEach(function(activity){
       var $activityOption = $('<option></option>').text(activity.name);
@@ -32,6 +55,10 @@ $(document).ready(function() {
   })
   .catch( console.error.bind(console) );
 
+Promise.all([gettingHotels, gettingRestaurants, gettingActivities])
+  .then(function([hotels,restaurants,activities]) {
+    options();
+  })
 
 })
 

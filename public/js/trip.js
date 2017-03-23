@@ -46,6 +46,7 @@ var tripModule = (function () {
   });
 
   function addDay () {
+    console.log("logged?")
     if (this && this.blur) this.blur(); // removes focus box from buttons
     var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
     days.push(newDay);

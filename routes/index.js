@@ -3,6 +3,7 @@ var router = require('express').Router();
 var Hotel = require('../models/hotel');
 var Restaurant = require('../models/restaurant');
 var Activity = require('../models/activity');
+var Day = require('./api/days')
 
 router.get('/', function(req, res, next) {
   Promise.all([
@@ -40,5 +41,7 @@ router.get('/api/activities', function(req, res, next) {
     res.json(activities);
   });
 });
+
+router.use(Day)
 
 module.exports = router;

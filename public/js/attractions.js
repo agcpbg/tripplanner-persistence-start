@@ -12,9 +12,9 @@ var attractionsModule = (function () {
   // application state
 
   var enhanced = {
-    hotels: hotels.map(attractionModule.create),
-    restaurants: restaurants.map(attractionModule.create),
-    activities: activities.map(attractionModule.create),
+    // hotels: hotels.map(attractionModule.create),
+    // restaurants: restaurants.map(attractionModule.create),
+    // activities: activities.map(attractionModule.create),
   };
 
   // private helper methods (only available inside the module)
@@ -28,6 +28,33 @@ var attractionsModule = (function () {
   // globally accessible module methods (available to other modules)
 
   var publicAPI = {
+
+    getHotel: function(hotels) {
+      enhanced.hotels = hotels;
+    },
+    
+    sendHotels: function() {
+      // console.log("enhanced.hotels: ", enhanced.hotels)
+      return enhanced.hotels;
+    },
+
+    getRestaurant: function(restaurants) {
+      enhanced.restaurants = restaurants;
+    },
+
+    sendRestaurants: function() {
+      // console.log("enhanced.hotels: ", enhanced.restaurants)
+      return enhanced.restaurants;
+    },
+
+    getActivity: function(activities) {
+      enhanced.activities = activities;
+    },
+
+    sendActivities: function() {
+      // console.log("enhanced.hotels: ", enhanced.hotels)
+      return enhanced.activities;
+    },
 
     getByTypeAndId: function (type, id) {
       if (type === 'hotel') return findById(enhanced.hotels, id);

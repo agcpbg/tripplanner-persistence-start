@@ -9,7 +9,7 @@
  * then tells the trip module to add the attraction.
  */
 
-$(function(){
+var options = function(){
 
   // jQuery selects
   var $optionsPanel = $('#options-panel');
@@ -18,6 +18,10 @@ $(function(){
   var $activitySelect = $optionsPanel.find('#activity-choices');
 
   // make all the option tags (second arg of `forEach` is a `this` binding)
+  var hotels = attractionsModule.sendHotels();
+  var restaurants = attractionsModule.sendRestaurants();
+  var activities = attractionsModule.sendActivities();
+
   hotels.forEach(makeOption, $hotelSelect);
   restaurants.forEach(makeOption, $restaurantSelect);
   activities.forEach(makeOption, $activitySelect);
@@ -39,4 +43,4 @@ $(function(){
     tripModule.addToCurrent(attraction);
   });
 
-});
+};
